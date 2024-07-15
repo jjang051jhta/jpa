@@ -34,6 +34,16 @@ public class QuestionTest {
         questionRepository.save(question02);
 
 
+
+        Question question03 = new Question();
+        question03.setSubject("바이엘은 어떻게 될까요?");
+        question03.setContent("바이엘은 떨어질까요?");
+        question03.setRegDate(LocalDateTime.now());
+        questionRepository.save(question03);
+
+
+
+
         //java method가지고 db입출력이 가능함...
 
     }
@@ -77,4 +87,23 @@ public class QuestionTest {
     }
 
 
+    @Test
+    public void findBySubjectLikeTest() {
+        List<Question> questionList = questionRepository.findBySubjectLike("%바이%");
+        //List<Question> questionList = questionRepository.findBySubjectLike("바이든은");
+        Assertions.assertEquals(questionList.size(), 2);
+    }
+
+    @Test
+    public void updateTest() {
+        Optional<Question> optionalQuestion = questionRepository.findById(1);
+        if(optionalQuestion.isPresent()) {
+            Question question = optionalQuestion.get();
+            question.setSubject("오바마는 잘 지내나?");
+            questionRepository.save(question);
+        }
+        //jpa는 update를 save로 사용하면 된다.
+        //만약 처음 입력되는 상태라면 insert를 진행하고
+        //찾아서 내용을 바꾸면 update 쿼리를 날린다.
+    }
 }
