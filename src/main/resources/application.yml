@@ -1,0 +1,32 @@
+server:
+  servlet:
+    session:
+      timeout: 1800
+      #tracking-modes: cookie
+
+
+spring:
+  application:
+    name: calendar
+  profiles:
+    active: dev
+
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update   # 테이블 만들어줌...
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+file:
+  path: C:/upload/
