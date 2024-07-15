@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest
 public class QuestionTest {
 
@@ -81,9 +83,10 @@ public class QuestionTest {
     @Test
     public void findBySubjectAndContentTest() {
         Question question = questionRepository.findBySubjectAndContent(
-                "바이든은 어떻게 될까요?","바이든은 떨어질까요?");
-        Assertions.assertEquals(question.getContent(), "바이든은 떨어질까요?");
-        Assertions.assertEquals(question.getSubject(), "바이든은 어떻게 될까요?");
+                "오바마는 잘 지내나?","트럼프가 대통령이 될까요? 되면 어떻게 될까요?");
+        //Assertions.assertEquals(question.getContent(), "바이든은 떨어질까요?");
+        //Assertions.assertEquals(question.getSubject(), "바이든은 어떻게 될까요?");
+        assertThat(question.getContent()).isEqualTo("트럼프가 대통령이 될까요? 되면 어떻게 될까요?");
     }
 
 
@@ -91,7 +94,8 @@ public class QuestionTest {
     public void findBySubjectLikeTest() {
         List<Question> questionList = questionRepository.findBySubjectLike("%바이%");
         //List<Question> questionList = questionRepository.findBySubjectLike("바이든은");
-        Assertions.assertEquals(questionList.size(), 2);
+        //Assertions.assertEquals(questionList.size(), 2);
+        assertThat(questionList.size()).isEqualTo(2);
     }
 
     @Test
