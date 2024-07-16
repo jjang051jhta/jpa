@@ -3,6 +3,7 @@ package com.jjang051.question.controller;
 import com.jjang051.question.entity.Question;
 import com.jjang051.question.service.QuestionService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/question")
+@Slf4j
 public class QuestionController {
 
     private final QuestionService questionService;
@@ -43,6 +45,7 @@ public class QuestionController {
     @GetMapping("/detail/{id}")
     public String list(Model model, @PathVariable("id") Integer id) {
         Question question = questionService.getQuestion(id);
+        //question.getAnswer().size();
         model.addAttribute("question",question);
         return "question/detail";
     }

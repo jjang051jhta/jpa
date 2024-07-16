@@ -12,13 +12,13 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class AnswerService {
     private final AnswerRepository answerRepository;
-    public int insert(String content, Question question) {
+    public void insert(String content, Question question) {
         Answer answer = Answer.builder()
                 .content(content)
                 .regDate(LocalDateTime.now())
                 .question(question)
                 .build();
+        //Answer answer1 = new Answer();
         answerRepository.save(answer);
-        return 1;
     }
 }

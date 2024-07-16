@@ -16,6 +16,13 @@
                 This is some text within a card body.
             </div>
         </div>
+        <p th:text="|${question.answer.size()}의 댓글이 있습니다.|"></p>
+        <div class="card mt-3" th:each="item : ${question.answer}">
+            <div class="card-body mt-3">
+                <p th:text="${item.content}"></p>
+                <p th:text="${item.regDate}"></p>
+            </div>
+        </div>
         <!--답변 기능-->
         <form class="mt-5" action="" method="post" th:method="post" th:action="@{|/answer/insert/${question.id}|}">
             <textarea class="form-control mb-3" rows="5" name="content"></textarea>

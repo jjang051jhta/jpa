@@ -1,15 +1,15 @@
 package com.jjang051.question.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Answer {
 
     @Id
@@ -21,6 +21,8 @@ public class Answer {
     private LocalDateTime regDate;
 
     @ManyToOne
+    //@JoinColumn(name="qid")
+    @JoinColumn
     private Question question;
 
     @Builder

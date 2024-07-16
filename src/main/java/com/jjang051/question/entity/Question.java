@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+
 //@Table(name = "table_question")
 @SequenceGenerator(
                     name = "question_sequence_generator",
@@ -38,7 +39,7 @@ public class Question {
     //foreign key
 
     @OneToMany(mappedBy = "question")
-    private List<Answer> answer;
+    private List<Answer> answer;  // foreign_key
 
     @Builder
     public Question(String subject, String content, LocalDateTime regDate) {
