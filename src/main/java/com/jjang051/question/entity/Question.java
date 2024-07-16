@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -31,6 +32,13 @@ public class Question {
     private String content;
 
     private LocalDateTime regDate;
+
+    //연관관계  질문 하나에 답변이 여러게 달릴 수 있음   1:n
+    //mappedBy  연관관계의 주인 설정
+    //foreign key
+
+    @OneToMany(mappedBy = "question")
+    private List<Answer> answer;
 
     @Builder
     public Question(String subject, String content, LocalDateTime regDate) {

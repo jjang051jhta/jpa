@@ -17,8 +17,8 @@
             </div>
         </div>
         <!--답변 기능-->
-        <form class="mt-5">
-            <textarea class="form-control mb-3" rows="5"></textarea>
+        <form class="mt-5" action="" method="post" th:method="post" th:action="@{|/answer/insert/${question.id}|}">
+            <textarea class="form-control mb-3" rows="5" name="content"></textarea>
             <button class="btn btn-primary">답변등록</button>
         </form>
     </div>
