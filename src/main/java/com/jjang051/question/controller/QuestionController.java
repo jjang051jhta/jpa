@@ -42,7 +42,8 @@ public class QuestionController {
         return "dummy";
     }
     @GetMapping("/list")
-    public String list(Model model,@RequestParam(value="page",defaultValue = "0") int page) {
+    public String list(Model model,
+                 @RequestParam(value="page",defaultValue = "0") int page) {
         //List<Question> questionList = questionService.getList();
         Page<Question> pageList = questionService.getList(page); //시작은 0
         log.info("pageList==={}",pageList.getSize());

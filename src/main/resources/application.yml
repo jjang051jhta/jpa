@@ -35,7 +35,7 @@ file:
   path: C:/upload/
 
 pagination:
-  size: 20
+  size: 5
 
 logging:
   level:

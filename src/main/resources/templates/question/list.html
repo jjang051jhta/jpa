@@ -32,6 +32,31 @@
       </tr>
     </tbody>
   </table>
+  <p th:text="|${questionList.totalPages - 1}의 페이지가 있습니다.|"></p>
+  <nav aria-label="Page navigation example my-5">
+    <ul class="pagination">
+      <li class="page-item" th:classappend="${!questionList.hasPrevious()} ? 'disabled'">
+        <a class="page-link" href="#"
+           th:href="@{|/question/list?page=${questionList.number-1}|}">Previous</a>
+      </li>
+      <!--th:if-->
+      <th:block th:each="page :
+                                ${#numbers.sequence(0,questionList.totalPages - 1)}">
+        <li class="page-item" th:classappend="${page==questionList.number}?'active'"
+            th:if="${page > questionList.number-3 && page < questionList.number+3}"
+        >
+          <a class="page-link" href="#" th:text="${page+1}"
+             th:href="@{|/question/list?page=${page}|}">1</a>
+        </li>
+      </th:block>
+<!--      <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--      <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+      <li class="page-item" th:classappend="${!questionList.hasNext()} ? 'disabled'">
+        <a class="page-link" href="#"
+           th:href="@{|/question/list?page=${questionList.number+1}|}">Next</a>
+      </li>
+    </ul>
+  </nav>
   <a href="/question/insert" class="btn btn-primary" th:action="@{/question/insert}">질문 작성</a>
 </div>
 </body>
