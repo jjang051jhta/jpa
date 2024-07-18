@@ -27,7 +27,7 @@ public class Question {
             generator = "question_sequence_generator")
     private Integer id;
 
-    //@Column(name = "column_subject", unique = true)
+    //@Column(unique = true)
     private String subject;
 
     private String content;
