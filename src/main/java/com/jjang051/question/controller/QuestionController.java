@@ -47,17 +47,12 @@ public class QuestionController {
         //List<Question> questionList = questionService.getList();
         Page<Question> pageList = questionService.getList(page); //시작은 0
         log.info("pageList==={}",pageList.getSize());
+        //0~5
+        int start = (int)Math.floor(page/5)*5;
+        int end = start+5;
         model.addAttribute("questionList",pageList);
-//        int current = (int)Math.floor(page/5)*5;
-//        if(current>pageList.getTotalPages()) {
-//            current=pageList.getTotalPages();
-//        }
-//        log.info("current==={}",current);
-        int start = (int)(Math.floor((double) pageList.getNumber() / 5)*5);
-        int end =  start + 5;
         model.addAttribute("start",start);
         model.addAttribute("end",end);
-        //model.addAttribute("current",current);
         return "question/list";
     }
 

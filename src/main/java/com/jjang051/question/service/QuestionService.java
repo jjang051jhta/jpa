@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,7 +51,10 @@ public class QuestionService {
 //        return questionRepository.findAll();
 //    }
     public Page<Question> getList(int page) {
-        Pageable pageable = PageRequest.of(page,size);
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("regDate"));
+        Pageable pageable = PageRequest.of(page,size,Sort.by(sorts));
+
         return questionRepository.findAll(pageable);
     }
 
