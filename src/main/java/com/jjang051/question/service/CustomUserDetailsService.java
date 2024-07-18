@@ -19,11 +19,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 
+    //
+
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
         log.info("로그인시도를 하면 여기로 들어온다");
         log.info("userId==={}",userId);
         Optional<Member> optionalMember = memberRepository.findByUserId(userId);
+        //데이터 끄집어 내오는 곳
         if(optionalMember.isPresent()) {
             //6개말고 다른것들도 쓸 수 있게 되었다...
             return new CustomUserDetails(optionalMember.get());

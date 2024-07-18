@@ -48,7 +48,7 @@ public class SecurityConfig {
                 .loginProcessingUrl("/member/login")  //우리가
                 .usernameParameter("userId")          //username
                 .passwordParameter("password")        //password
-                .defaultSuccessUrl("/board/list",true)
+                .defaultSuccessUrl("/question/list",true)
                 .permitAll()
         );
         httpSecurity.logout((auth)->auth

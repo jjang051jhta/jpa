@@ -5,6 +5,10 @@ import com.jjang051.question.exception.DataNotFoundException;
 import com.jjang051.question.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -15,8 +19,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class QuestionService {
-    private final QuestionRepository questionRepository;
 
+
+    @Value("${pagination.size}")
+    private int size;
+
+    private final QuestionRepository questionRepository;
     //메서드 만들어 쓰기
     public void insert(String subject, String content) {
         //Entity
@@ -37,8 +45,24 @@ public class QuestionService {
 
     }
 
-    public List<Question> getList() {
-        return questionRepository.findAll();
+//    public List<Question> getList() {
+//        return questionRepository.findAll();
+//    }
+    public Page<Question> getList(int page) {
+        Pageable pageable = PageRequest.of(page,size);
+        return questionRepository.findAll(pageable);
+    }
+
+//
+
+    public void insertQuestion() {
+        for(int i=0;i<125;i++) {
+            Question question01 = new Question();
+            question01.setSubject("테스트 제목입니다."+i);
+            question01.setContent("내용입니다."+i);
+            question01.setRegDate(LocalDateTime.now());
+            questionRepository.save(question01);
+        }
     }
 
     public Question getQuestion(Integer id) {

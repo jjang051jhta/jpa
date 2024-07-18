@@ -50,19 +50,19 @@ public class QuestionTest {
 
     }
 
-    @Test
-    public void getAllTest() {
-        List<Question> list = questionRepository.findAll();
-        Assertions.assertEquals(2, list.size());
-    }
-
-    @Test
-    public void getTitle() {
-        List<Question> list = questionRepository.findAll();
-        Question question01 = list.get(0);
-        Assertions.assertEquals("트럼프가 대통령이 될까요?",
-                question01.getSubject());
-    }
+//    @Test
+//    public void getAllTest() {
+//        List<Question> list = questionRepository.findAll();
+//        Assertions.assertEquals(2, list.size());
+//    }
+//
+//    @Test
+//    public void getTitle() {
+//        List<Question> list = questionRepository.findAll();
+//        Question question01 = list.get(0);
+//        Assertions.assertEquals("트럼프가 대통령이 될까요?",
+//                question01.getSubject());
+//    }
 
     @Test
     public void findByIdTest() {

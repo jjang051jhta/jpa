@@ -1,15 +1,15 @@
 package com.jjang051.question.controller;
 
+import com.jjang051.question.dto.CustomUserDetails;
 import com.jjang051.question.entity.Question;
 import com.jjang051.question.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,10 +35,18 @@ public class QuestionController {
         return "redirect:/question/list";
     }
 
+    @GetMapping("/dummy-list")
+    @ResponseBody
+    public String dummy() {
+        questionService.insertQuestion();
+        return "dummy";
+    }
     @GetMapping("/list")
-    public String list(Model model) {
-        List<Question> questionList = questionService.getList();
-        model.addAttribute("questionList",questionList);
+    public String list(Model model,@RequestParam(value="page",defaultValue = "0") int page) {
+        //List<Question> questionList = questionService.getList();
+        Page<Question> pageList = questionService.getList(page); //시작은 0
+        log.info("pageList==={}",pageList.getSize());
+        model.addAttribute("questionList",pageList);
         return "question/list";
     }
 
