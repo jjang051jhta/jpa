@@ -53,7 +53,9 @@ public class QuestionService {
     public Page<Question> getList(int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("regDate"));
+        sorts.add(Sort.Order.asc("subject"));
         Pageable pageable = PageRequest.of(page,size,Sort.by(sorts));
+        //Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Direction.DESC, "regDate,title"));
 
         return questionRepository.findAll(pageable);
     }

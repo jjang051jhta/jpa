@@ -12,7 +12,10 @@
     <div class="container">
         <h2 th:text="${question.subject}" class="mt-5 mb-5"></h2>
         <div class="card">
-            <div class="card-body" th:text="${question.content}">
+<!--            <div class="card-body" th:text="${question.content}">-->
+<!--                This is some text within a card body.-->
+<!--            </div>-->
+            <div class="card-body" th:utext="${@commonUtil.makeMarkdown(question.content)}">
                 This is some text within a card body.
             </div>
         </div>
@@ -29,5 +32,9 @@
             <button class="btn btn-primary">답변등록</button>
         </form>
     </div>
+<script>
+    // document.body.scrollTop = ;
+    // id
+</script>
 </body>
 </html>
